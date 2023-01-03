@@ -17,20 +17,20 @@ const firebaseConfig = {
 };
 
 export const app = firebase.initializeApp(firebaseConfig);
+// var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 // function getUI(){
 
 //   // #get
 
-//   var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 //   return ui
 
 // }
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.status(200);
+router.get('/app', function(req, res, next) {
+  res.send('OK');
 });
 
 export default router;

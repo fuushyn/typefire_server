@@ -1,5 +1,6 @@
 import express from "express";
 import path from 'path';
+import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
@@ -7,7 +8,7 @@ const __dirname = dirname(__filename);
 import authRouter from '../routes/auth.js';
 import gameRouter from '../routes/game.js';
 var app = express();
-
+app.use(cors());
 // app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -20,6 +21,7 @@ app.use('/game', gameRouter);
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index.html');
 });
-app.listen(3000, () => {
-  console.log(`listening on ${3000}`);
+let port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`listening on ${port}`);
 });

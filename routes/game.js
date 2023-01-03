@@ -48,7 +48,12 @@ async function getLeaderboardData(){
   // querySnapshot1.then((data)=>{
   //   console.log(data);
   // })
-  return querySnapshot1;
+
+  let docs = []
+  querySnapshot1.forEach((doc)=>{
+    docs.push(doc.data())
+  })
+  return docs
 }
 
 
@@ -111,19 +116,15 @@ async function addUpdateHighScore(userDet, result, score){
 }
 router.post('/geths', async function(req, res, next) {
   console.log(req.body);
-  let user = ((req.body).user);
+  let user = (req.body);
 
   const result = await getHighScore(user);
-  res.send(result);
+  res.json(result);
 });
 
 router.get('/lbdata', async function(req, res, next) {
   let data = await getLeaderboardData();
-
-  // data.then(x=>{
-  //   res.send({'string': JSON.stringify(x)});
-  // })
-  res.send(JSON.stringify(data))
+  res.send(JSON.stringify({data: data}))
   
 });
 
